@@ -1,0 +1,29 @@
+# Name of the GitHub Actions workflow
+name: Wake Up Streamlit Apps
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on a schedule
+  schedule:
+    # Runs every 30 minutes
+    - cron: '*/30 * * * *'
+  
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # The "wake-up" job
+  wake-up:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Step to send HTTP requests to your app URLs
+      - name: Ping Streamlit app URLs to keep them alive
+        run: |
+          curl -sS --fail "https://youtube101.streamlit.app/" > /dev/null || echo "URL 1 failed"
+          curl -sS --fail "https://nishantshares.streamlit.app/" > /dev/null || echo "URL 2 failed"
+          curl -sS --fail "https://htnewspaper.streamlit.app/" > /dev/null || echo "URL 3 failed"
+          curl -sS --fail "https://insect-cell-line-detector.streamlit.app/" > /dev/null || echo "URL 4 failed"
